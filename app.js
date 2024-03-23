@@ -14,6 +14,7 @@ const routerBooking = require('./Routes/bookingTours');
 
 // Call app
 const app = express();
+console.log('hi');
 // Míddleware
 if (process.env.NODE_ENV === 'development') {
   app.use(
