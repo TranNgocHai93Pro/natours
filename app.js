@@ -12,6 +12,7 @@ const AppErrors = require('./utils/appError');
 const GlobalErrorHandle = require('./controllers/errorController');
 const routerBooking = require('./Routes/bookingTours');
 
+// Call app
 const app = express();
 // Míddleware
 if (process.env.NODE_ENV === 'development') {
