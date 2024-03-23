@@ -1,0 +1,48 @@
+extend base
+
+mixin card(tour, i)
+    .card
+        .card__header
+            .card__picture
+                .card__picture-overlay &nbsp;
+                img.card__picture-img(src=`/img/tours/${tour.imageCover}`, alt=`Tour ${i +1}`)
+            h3.heading-tertirary
+                span= tour.name
+
+        .card__details
+            -const upperStr = tour.difficulty.charAt(0).toUpperCase() + tour.difficulty.slice(1)
+            h4.card__sub-heading= `${upperStr} ${tour.duration}-day tour` 
+            p.card__text= tour.summary
+
+            - const startDate = new Date(tour.startDates[0])
+            - const month = startDate.toLocaleString('en-US', { month: 'long' })
+            - const year = startDate.getFullYear()
+            - const startD = `${month} ${year}`
+           
+            each detail in [tour.startLocation.description, startD, `${tour.locations.length} stops`, `${tour.maxGroupSize} people`]
+                .card__data
+                    svg.card__icon
+                    use(xlink:href="/img/tours/icons.svg#icon-map-pin")
+                    span= detail
+        .card__footer
+            p
+                span.card__footer-value= `$${tour.price}`
+                span.card__footer-text  per person
+
+            p.card__ratings
+                span.card__footer-value= `${tour.ratingAvertage}`
+                span.card__footer-text   rating 
+
+            a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+
+block content 
+    main.main 
+        .card-container
+            each tour, i in tours 
+                +card(tour, i)
+
+
+
+
+
+
