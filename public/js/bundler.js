@@ -22833,7 +22833,7 @@ function _handleLogin() {
           });
         case 6:
           result = _context.sent;
-          console.log('result', result);
+          // console.log('result', result);
           if (result.status === 200) {
             // Đăng nhập thành công, chuyển hướng đến trang chính
             (0, _alerts.showAlert)('success', 'Login successful! Come to Home page.');
@@ -22844,18 +22844,18 @@ function _handleLogin() {
             // Đăng nhập thất bại, hiển thị thông báo lỗi
             (0, _alerts.showAlert)('error', result.message);
           }
-          _context.next = 15;
+          _context.next = 14;
           break;
-        case 11:
-          _context.prev = 11;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](3);
           console.error('Lỗi khi gửi yêu cầu đăng nhập:', _context.t0.response.data.message);
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
-        case 15:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 11]]);
+    }, _callee, null, [[3, 10]]);
   }));
   return _handleLogin.apply(this, arguments);
 }
@@ -22940,16 +22940,12 @@ function displayMap(locationsCurrent) {
     L.marker(marker.coordinates).addTo(map).bindTooltip(tooltip).openTooltip();
   });
   function handleLogin(e) {
-    console.log('hi');
     e.preventDefault(); // Ngăn chặn việc gửi form mặc định
 
     // Lấy giá trị từ các trường nhập liệu
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    console.log('data', {
-      email: email,
-      password: password
-    });
+    // console.log('data', { email, password });
     //Gửi yêu cầu đăng nhập đến máy chủ
     fetch('/api/v1/login', {
       method: 'POST',
@@ -22963,7 +22959,6 @@ function displayMap(locationsCurrent) {
     }).then(function (response) {
       if (response.status === 'success') {
         // Đăng nhập thành công, chuyển hướng đến trang chính
-        console.log(response);
         window.location.href = '/';
       } else {
         // Đăng nhập thất bại, hiển thị thông báo lỗi
@@ -23020,16 +23015,15 @@ var updateDataUserApi = exports.updateDataUserApi = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log(data);
           url = type === 'password' ? '/api/v1/users/updateMyPassword' : '/api/v1/users/updateMe';
-          _context.prev = 2;
-          _context.next = 5;
+          _context.prev = 1;
+          _context.next = 4;
           return (0, _axios.default)({
             method: 'PATCH',
             url: url,
             data: data
           });
-        case 5:
+        case 4:
           result = _context.sent;
           console.log('result-', result);
           if (result.data.status === 'success') {
@@ -23043,17 +23037,17 @@ var updateDataUserApi = exports.updateDataUserApi = /*#__PURE__*/function () {
           } else {
             showAlert('error', 'Update data User Fail.');
           }
-          _context.next = 13;
+          _context.next = 12;
           break;
-        case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](2);
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](1);
           showAlert('error', _context.t0.response.data.message);
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[2, 10]]);
+    }, _callee, null, [[1, 9]]);
   }));
   return function updateDataUserApi(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -23089,23 +23083,23 @@ var bookTour = exports.bookTour = /*#__PURE__*/function () {
         case 3:
           session = _context.sent;
           (0, _alerts.showAlert)('success', 'Get Booking success');
-          console.log(session.data.session.id);
-          _context.next = 8;
+          // console.log(session.data.session.id);
+          _context.next = 7;
           return stripe.redirectToCheckout({
             sessionId: session.data.session.id
           });
-        case 8:
-          _context.next = 13;
+        case 7:
+          _context.next = 12;
           break;
-        case 10:
-          _context.prev = 10;
+        case 9:
+          _context.prev = 9;
           _context.t0 = _context["catch"](0);
           (0, _alerts.showAlert)('error', _context.t0);
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 9]]);
   }));
   return function bookTour(_x) {
     return _ref.apply(this, arguments);
@@ -23246,7 +23240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56133" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49273" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

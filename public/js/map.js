@@ -37,13 +37,12 @@ export function displayMap(locationsCurrent) {
   });
 
   function handleLogin(e) {
-    console.log('hi');
     e.preventDefault(); // Ngăn chặn việc gửi form mặc định
 
     // Lấy giá trị từ các trường nhập liệu
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    console.log('data', { email, password });
+    // console.log('data', { email, password });
     //Gửi yêu cầu đăng nhập đến máy chủ
     fetch('/api/v1/login', {
       method: 'POST',
@@ -55,7 +54,6 @@ export function displayMap(locationsCurrent) {
       .then(response => {
         if (response.status === 'success') {
           // Đăng nhập thành công, chuyển hướng đến trang chính
-          console.log(response);
           window.location.href = '/';
         } else {
           // Đăng nhập thất bại, hiển thị thông báo lỗi

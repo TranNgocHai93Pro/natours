@@ -13,7 +13,7 @@ export const bookTour = async tourId => {
       url: `/api/v1/bookings/checkout-session/${tourId}`
     });
     showAlert('success', 'Get Booking success');
-    console.log(session.data.session.id);
+    // console.log(session.data.session.id);
     await stripe.redirectToCheckout({
       sessionId: session.data.session.id
     });

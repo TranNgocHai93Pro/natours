@@ -60,7 +60,7 @@ export async function handleLogin(e) {
         password
       }
     });
-    console.log('result', result);
+    // console.log('result', result);
     if (result.status === 200) {
       // Đăng nhập thành công, chuyển hướng đến trang chính
       showAlert('success', 'Login successful! Come to Home page.');

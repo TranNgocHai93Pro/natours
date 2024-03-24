@@ -44,7 +44,6 @@ const createTokenRes = function(user, statusCode, res) {
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await Users.create(req.body);
   let url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
   // SendEmail
   await new Email(newUser, url).sendWelcome();
   // Create Token
@@ -77,7 +76,6 @@ exports.login = catchAsync(async (req, res, next) => {
 //CHECK LOGIN
 exports.isLogging = async (req, res, next) => {
   if (req.cookies.jwt && req.cookies.jwt !== 'logout') {
-    console.log('loggined--');
     try {
       //1. Verfication token
       const decoded = await promisify(jwt.verify)(
@@ -176,7 +174,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 // RESTRICTO USER
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    console.log(roles);
+    // console.log(roles);
     //roles['admin', 'lead-guide'] -- kiêm tra xem role có nằm trong mảng hạn chế kh
     // console.log(req.user);
     if (!roles.includes(req.user.role)) {
@@ -231,7 +229,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save({ validateBeforSave: false });
-    console.log('error sent token --', error);
+    // console.log('error sent token --', error);
     return next(
       new AppErrors(
         'The sending to your email was occupt the error. Try to reset late!',

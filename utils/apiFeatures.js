@@ -34,7 +34,6 @@ class ApiFeatures {
     try {
       // Sort documents
       if (this.queryString.sort) {
-        console.log(this.queryString);
         // const sortBy = req.query.sort.split(',').join(' ');
         const sortBy = this.queryString.sort;
         this.query = this.query.sort(sortBy);

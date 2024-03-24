@@ -27,7 +27,6 @@ const { showAlert } = require('./alerts');
 // };
 
 export const updateDataUserApi = async (data, type) => {
-  console.log(data);
   const url =
     type === 'password'
       ? '/api/v1/users/updateMyPassword'
