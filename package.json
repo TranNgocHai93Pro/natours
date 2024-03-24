@@ -16,6 +16,8 @@
     "@stripe/stripe-js": "^3.0.10",
     "axios": "^1.6.1",
     "bcrypt": "^5.1.1",
+    "compress": "^0.99.0",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.36.0",
     "dotenv": "^16.3.1",

@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const path = require('path');
 // const { MongoClient, ObjectId } = require('mongodb');
 
@@ -24,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json()); // kiểm tra dữ liệu trong body có phải đinh dạng JSON không --> Object JS
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()); // Đọc dữ liệu URL khi ta dùng action form name=Owen&age=35
-
+app.use(compression());
 //thư viện querystring để xem dối tượng lồng nhau hoặc array
 app.use(express.static(path.join(__dirname, './public')));
 app.set('view engine', 'pug');
