@@ -54,7 +54,7 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   res.redirect(req.originalUrl.split('?')[0]);
 });
 
-// API tour
+// API BOOKING for [admin, leader]
 
 exports.createBooking = factory.createOne(BookingTours);
 exports.getBooking = factory.getOne(BookingTours);
