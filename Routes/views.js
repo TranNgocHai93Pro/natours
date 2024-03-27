@@ -14,6 +14,12 @@ router.get(
 );
 router.get('/tour/:slug', authController.isLogging, viewsController.getTour);
 router.get('/login', viewsController.loginForm);
+router.get(
+  '/my-booking',
+  authController.isLogging,
+  authController.protect,
+  viewsController.getBookingTours
+);
 
 router.get('/me', authController.isLogging, viewsController.accountUser);
 

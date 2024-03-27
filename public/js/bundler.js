@@ -22833,29 +22833,29 @@ function _handleLogin() {
           });
         case 6:
           result = _context.sent;
-          // console.log('result', result);
+          console.log('result', result);
           if (result.status === 200) {
             // Đăng nhập thành công, chuyển hướng đến trang chính
             (0, _alerts.showAlert)('success', 'Login successful! Come to Home page.');
             window.setTimeout(function () {
               location.assign('/');
-            }, 500);
+            }, 2000);
           } else {
             // Đăng nhập thất bại, hiển thị thông báo lỗi
             (0, _alerts.showAlert)('error', result.message);
           }
-          _context.next = 14;
+          _context.next = 15;
           break;
-        case 10:
-          _context.prev = 10;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context["catch"](3);
           console.error('Lỗi khi gửi yêu cầu đăng nhập:', _context.t0.response.data.message);
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
-        case 14:
+        case 15:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 10]]);
+    }, _callee, null, [[3, 11]]);
   }));
   return _handleLogin.apply(this, arguments);
 }
@@ -23240,7 +23240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49273" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58572" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

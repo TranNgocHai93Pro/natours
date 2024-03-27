@@ -2,6 +2,7 @@
 const Stripe = require('stripe');
 
 const Tours = require('../model/tourModel');
+const factory = require('./factoryController');
 const BookingTours = require('../model/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 
@@ -52,3 +53,11 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   //     ta điều hướng nó về URL gốc mà không có tham số truy vấn
   res.redirect(req.originalUrl.split('?')[0]);
 });
+
+// API tour
+
+exports.createBooking = factory.createOne(BookingTours);
+exports.getBooking = factory.getOne(BookingTours);
+exports.getAllBookings = factory.getAll(BookingTours);
+exports.deleteBooking = factory.deleteOne(BookingTours);
+exports.updateBooking = factory.updateOne(BookingTours);

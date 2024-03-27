@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 
 const Users = require('../model/userModel');
+const BookingTous = require('../model/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 // const sendEmailClient = require('../utils/sendEmail');
 const AppErrors = require('../utils/appError');
@@ -15,7 +16,7 @@ const signToken = function(id) {
   });
 };
 // CREATE TOKEN FOR RES
-const createTokenRes = function(user, statusCode, res) {
+const createTokenRes = function(user, statusCode, req, res) {
   const token = signToken(user._id);
 
   // Set cookies for res, attacked with jwt
@@ -26,8 +27,8 @@ const createTokenRes = function(user, statusCode, res) {
       Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000
     )
   };
-  // Secure attribute only action with https:
   if (process.env.NODE_ENV === 'production') optionCookies.secure = true;
+
   // Remove password to res
   user.password = undefined;
   res.cookie('jwt', token, optionCookies);
@@ -47,7 +48,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   // SendEmail
   await new Email(newUser, url).sendWelcome();
   // Create Token
-  createTokenRes(newUser, 201, res);
+  createTokenRes(newUser, 201, req, res);
 });
 
 // LOGIN USER
@@ -67,10 +68,10 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!(await user.correctPassword(password, user.password))) {
     return next(new AppErrors('Incorrect password', 401));
   }
-  let url = `${req.protocol}://${req.get('host')}/me`;
-  await new Email(user, url).sendWelcome();
+  // let url = `${req.protocol}://${req.get('host')}/me`;
+  // await new Email(user, url).sendWelcome();
   //3. Everthing is ok, send data to Client.
-  createTokenRes(user, 200, res);
+  createTokenRes(user, 200, req, res);
 });
 
 //CHECK LOGIN
@@ -94,10 +95,16 @@ exports.isLogging = async (req, res, next) => {
       if (checkPasswordChange) {
         return next();
       }
+      //5. Booking of user
+      const bookingTours = await BookingTous.find({ user: freshUser.id });
+      const tourIds = bookingTours.map(el => el.tour._id);
       // Grant user next
       res.locals.user = freshUser;
+      res.locals.tourIds = tourIds;
+      console.log(res.locals);
       return next();
     } catch (err) {
+      console.log('loggin-107', err);
       return next();
     }
   }
@@ -266,7 +273,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3. Create resetPasswordChartAt : timestamp
   // 4. Log User and create token
-  createTokenRes(user, 200, res);
+  createTokenRes(user, 200, req, res);
 });
 
 //  UPDATE PASSWORD AFTER LOGINING APP
@@ -293,5 +300,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.confirmPassword = passwordConfirm;
   await user.save();
   // 5. Gửi phàn hồi update thành công
-  createTokenRes(user, 200, res);
+  createTokenRes(user, 200, req, res);
 });

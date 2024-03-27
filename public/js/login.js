@@ -60,13 +60,13 @@ export async function handleLogin(e) {
         password
       }
     });
-    // console.log('result', result);
+    console.log('result', result);
     if (result.status === 200) {
       // Đăng nhập thành công, chuyển hướng đến trang chính
       showAlert('success', 'Login successful! Come to Home page.');
       window.setTimeout(() => {
         location.assign('/');
-      }, 500);
+      }, 2000);
     } else {
       // Đăng nhập thất bại, hiển thị thông báo lỗi
       showAlert('error', result.message);

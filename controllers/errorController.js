@@ -88,7 +88,7 @@ const handleExpiredJwtError = () => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-  // console.log('err.name', err);
+  console.log('err.name', err);
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
@@ -97,7 +97,7 @@ module.exports = (err, req, res, next) => {
     // B2: thay thế message lỗi từ thành lỗi dễ hiểu và thân thiện với người dùng
     let error = { ...err };
     error.message = err.message;
-    // console.log(err);
+    console.log(err);
     // console.log('error---', error);
     if (err.name === 'CastError') error = handleCastErrorDB(err);
     if (err.code === 11000) error = handeDuplicateErrorDB(err);
