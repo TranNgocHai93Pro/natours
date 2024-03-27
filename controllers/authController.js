@@ -101,7 +101,6 @@ exports.isLogging = async (req, res, next) => {
       // Grant user next
       res.locals.user = freshUser;
       res.locals.tourIds = tourIds;
-      console.log(res.locals);
       return next();
     } catch (err) {
       console.log('loggin-107', err);
