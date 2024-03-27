@@ -2,7 +2,7 @@
 // import axios from 'axios';
 // import { showAlert } from './alerts';
 import axios from 'axios';
-const { showAlert } = require('./alerts.mjs');
+const { showAlert } = require('./alerts.js');
 
 // // type is either 'password' or 'data'
 // export const updateSettings = async (data, type) => {

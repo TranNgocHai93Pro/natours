@@ -2,7 +2,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import { handleLogin, handleLogout } from './login.mjs';
+import { handleLogin, handleLogout } from './login.js';
 import { displayMap } from './map';
 import { updateDataUserApi } from './updateSettings';
 import { bookTour } from './stripe';
