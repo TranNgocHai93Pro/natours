@@ -8,7 +8,8 @@
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundler.js --public-url .",
-    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundler.js --public-url ."
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundler.js --public-url .",
+    "test": "echo \"Error: no test specified\" && exit=1"
   },
   "author": "Owen",
   "license": "ISC",
@@ -52,6 +53,6 @@
     "prettier": "^1.17.0"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=20.0.0"
   }
 }
