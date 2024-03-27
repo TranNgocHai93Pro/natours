@@ -42,7 +42,7 @@
 // Đăng ký sự kiện khi form đăng nhập được gửi
 
 import axios from 'axios';
-import { showAlert } from './alerts';
+import { showAlert } from './alerts.mjs';
 
 export async function handleLogin(e) {
   e.preventDefault(); // Ngăn chặn việc gửi form mặc định

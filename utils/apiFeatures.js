@@ -1,4 +1,4 @@
-const Tours = require('./../model/tourModel');
+const Tours = require('../model/tourModel');
 
 class ApiFeatures {
   constructor(query, queryString) {
