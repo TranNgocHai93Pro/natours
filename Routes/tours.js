@@ -15,7 +15,7 @@ routerTours.route('/monthPlan/:year').get(controllerTours.getMonthPlan);
 
 routerTours
   .route('/')
-  .get(authControllers.protect, controllerTours.GetAllTours)
+  .get(controllerTours.GetAllTours)
   .post(
     authControllers.protect,
     authControllers.restrictTo('admin', 'lead-guide'),
