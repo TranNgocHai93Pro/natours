@@ -4,27 +4,7 @@
 import axios from 'axios';
 const { showAlert } = require('./alerts.js');
 
-// // type is either 'password' or 'data'
-// export const updateSettings = async (data, type) => {
-//   try {
-//     const url =
-//       type === 'password'
-//         ? '/api/v1/users/updateMyPassword'
-//         : '/api/v1/users/updateMe';
-
-//     const res = await axios({
-//       method: 'PATCH',
-//       url,
-//       data
-//     });
-
-//     if (res.data.status === 'success') {
-//       showAlert('success', `${type.toUpperCase()} updated successfully!`);
-//     }
-//   } catch (err) {
-//     showAlert('error', err.response.data.message);
-//   }
-// };
+// type is either 'password' or 'data'
 
 export const updateDataUserApi = async (data, type) => {
   const url =
@@ -37,12 +17,12 @@ export const updateDataUserApi = async (data, type) => {
       url,
       data
     });
-    console.log('result-', result);
     if (result.data.status === 'success') {
       showAlert('success', `Update ${type.toUpperCase()} successful.`);
       document.getElementById('password-current').value = '';
       document.getElementById('password').value = '';
       document.getElementById('password-confirm').value = '';
+
       window.setTimeout(() => location.reload(), 2000);
     } else {
       showAlert('error', 'Update data User Fail.');

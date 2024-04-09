@@ -1,0 +1,22 @@
+extend base
+
+block content
+    main.main
+        .container
+            .row
+                .col-lg-6(align="center")
+                    label(onclick="start_cropping()")  Browse image
+                    #display_image_div
+                        img(name="display_image_data", id="display_image_data", src="/img/users/default.jpg", alt="Picture")
+                    input(type="hidden", name="cropped_image_data", id="cropped_image_data")
+                    br
+                    input(type="file", name="browse_image", id="browse_image", class="form-control")
+                .col-lg-6(align="center")
+                    label Preview
+                    #cropped_image_result
+                        img(style="width: 350px;", src="/img/users/default.jpg")
+                    br
+                    button.btn.btn-success(id="crop_button") Crop
+                    button.btn.btn-danger(id="download_button", onclick="download()") Download
+                    button.btn.btn-warning(id="upload_button", onclick="upload()") Upload
+        

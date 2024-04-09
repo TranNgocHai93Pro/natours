@@ -18,7 +18,7 @@ mixin card(tour, i)
             - const month = startDate.toLocaleString('en-US', { month: 'long' })
             - const year = startDate.getFullYear()
             - const startD = `${month} ${year}`
-           
+
             each detail in [tour.startLocation.description, startD, `${tour.locations.length} stops`, `${tour.maxGroupSize} people`]
                 .card__data
                     svg.card__icon
@@ -37,6 +37,8 @@ mixin card(tour, i)
 
 block content 
     main.main 
+        if (title === 'Booking Tours' && tours.length === 0)
+            div.noneBooking None Tour is booked by You !
         .card-container
             each tour, i in tours 
                 +card(tour, i)

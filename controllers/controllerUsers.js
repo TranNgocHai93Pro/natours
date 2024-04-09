@@ -1,5 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
+// const { cloudinary } = require('../utils/uploadCloudary');
 
 const Users = require('../model/userModel');
 const AppErrors = require('../utils/appError');
@@ -39,7 +40,6 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.file.fieldname}`);
-
   next();
 });
 
@@ -66,8 +66,10 @@ exports.getMe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   // 1. Don't allow change the password with this route.
   const { password, passwordConfirm } = req.body;
+
   if (password || passwordConfirm)
     return next(
       new AppErrors(
@@ -77,9 +79,19 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   // 2. Update data user with dataAllowed.
 
-  const resultFilter = filterAllowed(req.body, 'name', 'email'); // Update Image User
-  if (req.file) resultFilter.photo = req.file.fieldname; // Save path Image to DB
+  const resultFilter = filterAllowed(req.body, 'name', 'email', 'photo'); // Update Image User
 
+  // const result = await cloudinary.uploader.upload(
+  //   `public/img/users/${req.file.fieldname}`,
+  //   {
+  //     upload_preset: 'user-photo'
+  //   }
+  // );
+  // const result = await cloudinary.uploader.upload(req.body.photo, {
+  //   upload_preset: 'user-photo'
+  // });
+
+  // if (req.file) resultFilter.photo = result.secure_url; // Save path Image to DB
   const newUser = await Users.findByIdAndUpdate(req.user.id, resultFilter, {
     new: true,
     runValidators: true

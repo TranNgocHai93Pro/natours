@@ -27,7 +27,7 @@ block content
                 .user-view__form-container
                     h2.heading-secondary.ma-bt-md Your account settings
                     //- form.form.form-user-data
-                    form.form.form-user-data(action='/updateUserData' method='POST' enctype='multipart/form-data')
+                    form.form.form-user-data( enctype='multipart/form-data')
                         .form__group
                             label.form__label(for='name') Name
                             input#name.form__input(type='text', name='name', value=`${user.name}`, required)
@@ -35,11 +35,23 @@ block content
                             label.form__label(for='email') Email Addresss
                             input#email.form__input(type='email', name='email', value=`${user.email}`, required)
                         .form__group.form__photo-upload
-                            img.form__user-photo(src=`/img/users/${user.photo ? user.photo :'default.jpg'}`, alt=`${user.name}-User photo`)
+                            img.form__user-photo(src=`${!user.photo.startsWith('default') ? user.photo :'/img/users/default.jpg'}`, alt=`${user.name}-User photo`)
                             input.form__upload(type='file', access='image/*', id='photo' name='photo')
-                            label(for='photo') Choose new photo
+                          
+                            label#photo(for='photo') Choose new photo
                         .form__group.right
-                            button.btn.btn--small.btn--green Save settings
+                            button.btn.btn--small.btn--green.btn--saveSet Save settings
+                        #modal.hidden
+                            .container-modal
+                                #cropper-container 
+                                    img#image(src='/img/users/default.jpg' alt='image crop')
+                                #cropped_image_result
+                                    img(style="width: 350px;", src="/img/users/default.jpg")
+                            .btn-edit
+                                button.crop-button Crop
+                                button.save-button Save Image
+                           
+                        
                 .line &nbsp;
                 .user-view__form-container
                     h2.heading-secondary.ma-bt-md Password change
@@ -54,4 +66,4 @@ block content
                             label.form__label(for='password-confirm') Confirm password
                             input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
                         .form__group.right
-                            button.btn.btn--small.btn--green.btn--savePwd(type='submit') Save password
+                            button.btn.btn--small.btn--green.btn--savePwd Save password

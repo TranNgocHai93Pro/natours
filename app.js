@@ -1,5 +1,6 @@
 const express = require('express');
-const morgan = require('morgan');
+const bodyParser = require('body-parser');
+// const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const path = require('path');
@@ -12,18 +13,20 @@ const routerViews = require('./Routes/views');
 const AppErrors = require('./utils/appError');
 const GlobalErrorHandle = require('./controllers/errorController');
 const routerBooking = require('./Routes/bookingTours');
+const routerUpload = require('./Routes/routerUpload');
 
 // Call app
 const app = express();
 
 // Míddleware
-if (process.env.NODE_ENV === 'development') {
-  app.use(
-    morgan(':method :url :status :res[content-length] - :response-time ms')
-  );
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(
+//     morgan(':method :url :status :res[content-length] - :response-time ms')
+//   );
+// }
 app.use(express.json()); // kiểm tra dữ liệu trong body có phải đinh dạng JSON không --> Object JS
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser()); // Đọc dữ liệu URL khi ta dùng action form name=Owen&age=35
 app.use(compression());
 //thư viện querystring để xem dối tượng lồng nhau hoặc array
@@ -41,6 +44,7 @@ app.use('/api/v1/tours', routerTours);
 app.use('/api/v1/users', routerUsers);
 app.use('/api/v1/reviews', routerReviews);
 app.use('/api/v1/bookings', routerBooking);
+app.use('/api/v1/images', routerUpload);
 
 app.all('*', (req, res, next) => {
   next(new AppErrors(`Can't find ${req.originalUrl} on server`, 404)); // class xử lý các lỗi

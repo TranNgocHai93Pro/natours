@@ -39,6 +39,12 @@ exports.loginForm = catchAsync(async (req, res) => {
   });
 });
 
+exports.signUpForm = catchAsync(async (req, res) => {
+  res.status(200).render('signUp', {
+    title: 'SignUp'
+  });
+});
+
 exports.accountUser = catchAsync(async (req, res) => {
   res.status(200).render('account', {
     title: 'This is account User'
@@ -60,6 +66,7 @@ exports.updateUserDate = catchAsync(async (req, res) => {
   res.status(200).render('account', { user: updateUser });
 });
 
+// Get Booking Tours
 exports.getBookingTours = catchAsync(async (req, res) => {
   const bookingTours = await BookingTous.find({ user: req.user.id });
   const tourIds = bookingTours.map(el => el.tour._id);
@@ -68,4 +75,9 @@ exports.getBookingTours = catchAsync(async (req, res) => {
     title: 'Booking Tours',
     tours
   });
+});
+
+// Crop image
+exports.cropImage = catchAsync(async (req, res) => {
+  res.status(200).render('cropImg');
 });
